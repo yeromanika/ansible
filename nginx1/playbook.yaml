@@ -1,0 +1,21 @@
+---
+
+- name: install
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx
+      package:
+        name: nginx
+        state: latest
+
+    - name: podmena
+      copy:
+        src: index.html
+        dest: /var/www/html/
+
+    - name: enable nginx
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
